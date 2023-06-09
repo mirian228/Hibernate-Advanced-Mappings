@@ -1,6 +1,7 @@
 package com.mirian.app;
 
 import com.mirian.app.dao.InstructorDao;
+import com.mirian.app.dao.InstructorDetailDao;
 import com.mirian.app.model.Instructor;
 import com.mirian.app.model.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +18,19 @@ public class HibernateAdvancedMappingsApplication {
 
 
     @Bean
-    public CommandLineRunner commandLineRunner(InstructorDao instructorDao) {
+    public CommandLineRunner commandLineRunner(InstructorDao instructorDao, InstructorDetailDao instructorDetailDao) {
         return runner -> {
-            createInstructor(instructorDao);
+            findInstructorDetail(instructorDetailDao);
         };
+    }
+
+    private void findInstructorDetail(InstructorDetailDao instructorDetailDao) {
+        int theId = 2;
+        System.out.println("Finding instructor detail id: " + theId);
+        InstructorDetail tempInstructorDetail = instructorDetailDao.findInstructorDetailById(theId);
+        System.out.println("tempInstructorDetail: " + tempInstructorDetail);
+        System.out.println("The associated instructor: " + tempInstructorDetail.getInstructor());
+
     }
 
     private void deleteInstructorById(InstructorDao instructorDao) {
