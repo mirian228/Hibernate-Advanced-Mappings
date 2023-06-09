@@ -19,3 +19,15 @@ CREATE TABLE instructor (
 	ON DELETE NO ACTION ON UPDATE NO ACTION
 ) Engine=InnoDB auto_increment=1 charset=utf8mb4;
 
+CREATE TABLE course(
+	id int(11) NOT NULL AUTO_INCREMENT,
+    title varchar(128) DEFAULT NULL,
+	instructor_id int(11) DEFAULT NULL,
+    
+    PRIMARY KEY(id),
+    UNIQUE KEY TITLE_UNIQUE (title),
+    KEY FK_INSTRUCTOR_idx (instructor_id),
+    FOREIGN KEY (instructor_id) REFERENCES instructor(id)
+) Engine=InnoDb auto_increment=1 charset=utf8mb4;
+
+drop table course;

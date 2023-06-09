@@ -2,6 +2,8 @@ package com.mirian.app.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "instructor")
 public class Instructor {
@@ -18,7 +20,8 @@ public class Instructor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
-
+    @OneToMany(mappedBy = "instructorId", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Course> course;
 
     public Instructor() {
     }
@@ -59,6 +62,14 @@ public class Instructor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<Course> course) {
+        this.course = course;
     }
 
     public InstructorDetail getInstructorDetail() {
