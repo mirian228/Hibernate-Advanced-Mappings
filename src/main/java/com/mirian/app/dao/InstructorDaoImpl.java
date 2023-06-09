@@ -33,6 +33,7 @@ public class InstructorDaoImpl implements InstructorDao {
     }
 
     @Override
+    @Transactional
     public void deleteInstructor(int instructorId) {
         Instructor instructor = entityManager.find(Instructor.class, instructorId);
         entityManager.remove(instructor);

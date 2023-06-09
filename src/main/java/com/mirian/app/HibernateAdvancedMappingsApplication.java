@@ -19,8 +19,16 @@ public class HibernateAdvancedMappingsApplication {
     @Bean
     public CommandLineRunner commandLineRunner(InstructorDao instructorDao) {
         return runner -> {
-            findInstructor(instructorDao);
+            createInstructor(instructorDao);
         };
+    }
+
+    private void deleteInstructorById(InstructorDao instructorDao) {
+        int theId = 1;
+        System.out.println("Finding Instructor with id: " + theId);
+        System.out.println("Removing Instrcutor....");
+        instructorDao.deleteInstructor(theId);
+        System.out.println("Instructor removed");
     }
 
     private void findInstructor(InstructorDao instructorDao) {
