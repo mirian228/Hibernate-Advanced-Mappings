@@ -20,6 +20,9 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
+    public InstructorDetail() {
+    }
+
     public int getId() {
         return id;
     }
@@ -44,7 +47,6 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
-
     @Override
     public String toString() {
         return "InstructorDetail{" +
@@ -54,3 +56,4 @@ public class InstructorDetail {
                 '}';
     }
 }
+

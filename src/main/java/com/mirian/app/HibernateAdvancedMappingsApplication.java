@@ -1,5 +1,8 @@
 package com.mirian.app;
 
+import com.mirian.app.dao.InstructorDao;
+import com.mirian.app.model.Instructor;
+import com.mirian.app.model.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +17,32 @@ public class HibernateAdvancedMappingsApplication {
 
 
     @Bean
-    public CommandLineRunner commandLineRunner(String[] args) {
+    public CommandLineRunner commandLineRunner(InstructorDao instructorDao) {
         return runner -> {
-            System.out.println("hello");
+            findInstructor(instructorDao);
         };
+    }
+
+    private void findInstructor(InstructorDao instructorDao) {
+        int theId = 1;
+        System.out.println("Finding instructor id: " + theId);
+        Instructor tempInstructor = instructorDao.findInstructorById(theId);
+
+        System.out.println("temp instructor: " + tempInstructor);
+        System.out.println("the associate instructorDetail only: " + tempInstructor.getInstructorDetail());
+    }
+
+    private void createInstructor(InstructorDao instructorDao) {
+        // Create Instructor and Instructor detail
+        Instructor tempInstructor = new Instructor("Mirian", "Surmanidze", "m.s@gmail.com");
+        InstructorDetail tempnIstructorDetail = new InstructorDetail("http://youtube.com/it.garage", "hobby");
+        // Set instructor details attached to this obbject
+        tempInstructor.setInstructorDetail(tempnIstructorDetail);
+        // Print instructor
+        System.out.println("Saving instructor: " + tempInstructor);
+        // Save instructor
+        instructorDao.save(tempInstructor);
+
     }
 
 }
