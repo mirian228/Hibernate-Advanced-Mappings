@@ -13,7 +13,9 @@ public class InstructorDetail {
     private String youtubeChannel;
     @Column(name = "hobby")
     private String hobby;
-
+    // Establishing Bi-Directional relationship
+    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    private Instructor instructor;
 
     public InstructorDetail(String youtubeChannel, String hobby) {
         this.youtubeChannel = youtubeChannel;
@@ -21,6 +23,14 @@ public class InstructorDetail {
     }
 
     public InstructorDetail() {
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
     }
 
     public int getId() {
