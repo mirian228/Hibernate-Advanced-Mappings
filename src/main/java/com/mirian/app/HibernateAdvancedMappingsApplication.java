@@ -2,6 +2,7 @@ package com.mirian.app;
 
 import com.mirian.app.dao.InstructorDao;
 import com.mirian.app.dao.InstructorDetailDao;
+import com.mirian.app.model.Course;
 import com.mirian.app.model.Instructor;
 import com.mirian.app.model.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -20,8 +21,26 @@ public class HibernateAdvancedMappingsApplication {
     @Bean
     public CommandLineRunner commandLineRunner(InstructorDao instructorDao, InstructorDetailDao instructorDetailDao) {
         return runner -> {
-            findInstructorDetail(instructorDetailDao);
+            createInstructorWithCourse(instructorDao);
         };
+    }
+
+    private void createInstructorWithCourse(InstructorDao instructorDao) {
+
+        Instructor tempInstructor = new Instructor("Susan", "Public", "s.s@gmail.com");
+        InstructorDetail tempnIstructorDetail = new InstructorDetail("http://youtube.com", "games");
+        Course tempCourse1 = new Course("Guitar");
+        Course tempCourse2 = new Course("Piano");
+        tempInstructor.setInstructorDetail(tempnIstructorDetail);
+
+        tempInstructor.add(tempCourse1);
+        tempInstructor.add(tempCourse2);
+
+
+        System.out.println("Saving instructor: " + tempInstructor);
+        System.out.println("The courses: " + tempInstructor.getCourse());
+        instructorDao.save(tempInstructor);
+        System.out.println("Done");
     }
 
     private void findInstructorDetail(InstructorDetailDao instructorDetailDao) {

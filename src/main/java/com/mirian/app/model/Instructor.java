@@ -2,6 +2,7 @@ package com.mirian.app.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -66,6 +67,14 @@ public class Instructor {
 
     public List<Course> getCourse() {
         return course;
+    }
+
+    public void add(Course tempCourse) {
+        if (course == null) {
+            course = new ArrayList<>();
+        }
+        course.add(tempCourse);
+        tempCourse.setInstructorId(this);
     }
 
     public void setCourse(List<Course> course) {
